@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { LinkIcon } from "../IconComponent";
+import { LinkIcon } from "./IconComponent";
 
 export function HomePage() {
   const [tripsData, setTripsData] = useState([]);
@@ -72,63 +72,63 @@ export function HomePage() {
         </div>
       </header>
 
-      <main className="m-24">
-        {tripsData.map((trip) => (
-          <div className="flex mt-7  justify-center" key={trip.eid}>
-            <img
-              className="h-60 w-96 object-cover rounded-xl shadow-lg mx-4 mb-8"
-              src={trip.photos[0]}
-              alt={trip.title}
-            />
-            <div className="ml-4">
-              <h3 className="text-2xl">{trip.title}</h3>
-              <h4>
-                {trip.description.length > 100
-                  ? trip.description.slice(0, 100) + "..."
-                  : trip.description}
-              </h4>
-              <button
-                onClick={() => window.open(trip.url, "_blank")}
-                className="underline text-cyan-400"
-              >
-                อ่านต่อ
-              </button>
-
-              <div className="flex gap-4">
-                <p>หมวดหมู่</p>
-                {trip.tags.map((tag) => (
-                  <button
-                    key={tag}
-                    className={`underline ${
-                      keywords.includes(tag) ? "text-red-500" : ""
-                    }`}
-                    onClick={() => handleTagClick(tag)}
-                  >
-                    {tag}
-                  </button>
-                ))}
-              </div>
-              <div className="flex flex-row gap-4 mt-6">
-                {trip.photos.slice(1).map((photo, indexPhoto) => (
-                  <img
-                    key={indexPhoto}
-                    className="w-20 h-20 rounded-xl"
-                    src={photo}
-                    alt={`Photo ${indexPhoto + 2}`}
-                  />
-                ))}
-              </div>
-              <div className="flex justify-end items-end">
+      <main className="flex justify-center mt-20">
+        <div className="flex flex-col items-start">
+          {tripsData.map((trip) => (
+            <div className="flex mt-7  justify-center" key={trip.eid}>
+              <img
+                className="h-[20rem] w-[30rem] object-cover rounded-xl shadow-lg mx-4 mb-8"
+                src={trip.photos[0]}
+                alt={trip.title}
+              />
+              <div className="ml-4 max-w-[45rem] max-h-[20rem]">
+                <h3 className="text-2xl">{trip.title}</h3>
+                <h4>
+                  {trip.description.length > 100
+                    ? trip.description.slice(0, 100) + "..."
+                    : trip.description}
+                </h4>
                 <button
-                  onClick={() => handleCopyToClipboard(trip.url)}
-                  className="ml-4 underline text-cyan-400 "
+                  onClick={() => window.open(trip.url, "_blank")}
+                  className="underline text-cyan-400"
                 >
-                  <LinkIcon />
+                  อ่านต่อ
                 </button>
+
+                <div className="flex gap-4">
+                  <p>หมวดหมู่</p>
+                  {trip.tags.map((tag) => (
+                    <button
+                      key={tag}
+                      className={`underline ${
+                        keywords.includes(tag) ? "text-red-500" : ""
+                      }`}
+                      onClick={() => handleTagClick(tag)}
+                    >
+                      {tag}
+                    </button>
+                  ))}
+                </div>
+                <div className="flex flex-row gap-4 mt-24">
+                  {trip.photos.slice(1).map((photo, indexPhoto) => (
+                    <img
+                      key={indexPhoto}
+                      className="w-[10rem] h-[7.5rem] rounded-xl"
+                      src={photo}
+                      alt={`Photo ${indexPhoto + 2}`}
+                    />
+                  ))}
+                  <button
+                    onClick={() => handleCopyToClipboard(trip.url)}
+                    className="ml-20 mt-20 text-cyan-400 "
+                  >
+                    <LinkIcon />
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </main>
 
       {notification && (
